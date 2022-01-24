@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native';
+import { StyleSheet, ScrollView, View, SafeAreaView, Image } from 'react-native';
 import React from 'react';
 import tw from 'twrnc';
 import NavOptions from '../components/NavOptions';
@@ -9,7 +9,7 @@ import { GOOGLE_MAPS_APIKEY } from '@env';
 
 const HomeScreen = () => {
     return (
-        <SafeAreaView style={tw`bg-white h-full mt-5`}>
+        <SafeAreaView style={tw`bg-white h-full`}>
             <View style={tw`p-5`}>
                 <Image
                     style={{
@@ -21,11 +21,30 @@ const HomeScreen = () => {
                         uri: 'https://links.papareact.com/gzs',
                     }}
                 />
-                <GooglePlacesAutocomplete
-                    placeholder='Where From ?'
-                    neartyPlacesAPI='GooglePlacesSearch'
-                    debounce={400}
-                />
+                    <GooglePlacesAutocomplete
+                        placeholder='Where From ?'
+                        styles={{
+                            container: {
+                                flex: 0,
+                            },
+                            textInput: {
+                                fontSize: 18,
+                            }
+                        }}
+                        onPress={(data, details = null) => {
+                            console.log(data);
+                            console.log(details);
+                        }}
+                        query={{
+                            key: GOOGLE_MAPS_APIKEY,
+                            language: 'en',
+                        }}
+                        minLength={2}
+                        fetchDetails={true}
+                        onFail={error => console.log(error)}
+                        nearbyPlacesAPI='GooglePlacesSearch'
+                        debounce={400}
+                    />
                 <NavOptions/>
             </View>
         </SafeAreaView>
