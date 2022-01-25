@@ -3,9 +3,12 @@ import React from 'react';
 import tw from 'twrnc'
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { selectOrigin } from '../slices/navSlice';
 
 export default function NavOptions() {
 
+    const origin = useSelector(selectOrigin);
     const DATA = [
         {
             id: '123',
@@ -33,8 +36,9 @@ export default function NavOptions() {
                     <TouchableOpacity 
                         style={tw`p-2 pl-6 pb-8 pt-2 bg-gray-200 m-2 w-40`}
                         onPress={() => navigation.navigate(item.screen)}
+                        disabled={!origin}
                     >
-                        <View>
+                        <View style={tw`${!origin && "opacity-20"}`}>
                             <Image
                                 style={{ width: 120, height: 120, resizeMode: 'contain'}}
                                 source={{uri: item.image}}

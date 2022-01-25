@@ -10,12 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 export default function NavigateCard() {
 
     const dispatch = useDispatch();
-    const initialState = {
-        latitude: 40.78825,
-        longitude: -140.4324,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
-    }
     const navigation = useNavigation();
 
 
@@ -37,7 +31,11 @@ export default function NavigateCard() {
                             language: "en"
                         }}
                         onPress={(data, details = null) => {
-                            
+                            dispatch(setDestination({
+                                location: details.geometry.location,
+                                description: data.description
+                            }))
+                            navigation.navigate("RideOptionsCard");
                         }}
                     >
                     </GooglePlacesAutocomplete>
