@@ -34,7 +34,9 @@ export default function RideOptionsCard() {
         }
     ]
 
-    return (
+    const SURGE_CHARGE_RATE = 1.5;
+
+    return (    
         <SafeAreaView style={tw`bg-white flex-grow mt-2`}>
             <View>
                 <TouchableOpacity 
@@ -44,7 +46,7 @@ export default function RideOptionsCard() {
                 style={tw`absolute top-3 left-5 z-50 p-3 rounded-full`}>
                     <Icon name='chevron-left' type='fontawesome'/>
                 </TouchableOpacity>
-                <Text style={tw`text-center py-5 pb-6 text-xl`}>Select a Ride - {travelTimeInformation?.distance.text}</Text>
+                <Text style={tw`text-center py-5 pb-6 text-xl`}>Select a Ride - {travelTimeInformation?.distance?.text}</Text>
             </View>
 
             <FlatList
@@ -68,13 +70,20 @@ export default function RideOptionsCard() {
                         />
                         <View style={tw`-ml-6`}>
                             <Text style={tw`text-xl font-semibold`}>{item.title}</Text>
-                            <Text>{travelTimeInformation?.duration.text} Time</Text>
+                            <Text>{travelTimeInformation?.duration?.text} Time</Text>
                         </View>
-                        <Text style={tw`text-lg`}>$200</Text>
+                        <Text style={tw`text-lg`}>${
+                            // new Intl.NumberFormat('en-gb', {
+                            //     style: "currency",
+                            //     currency: 'GBP'
+                            // }).format(
+                                ((travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * item.multiplier) / 100).toFixed(2)
+                            // )
+                        }</Text>
                     </TouchableOpacity>
                 )}
             />
-            <View>
+            <View style={tw`mt-auto border-t border-gray-200`}>
                 <TouchableOpacity 
                     // onPress={() => {
                     //     navigation.navigate("NavigateCard")

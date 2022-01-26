@@ -30,8 +30,8 @@ export default function Map() {
         if(!origin || !destination) return;
 
         const getTravelTime = async() => {
-            fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
-            .then(response => response.json)
+            fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
+            .then(response => response.json())
             .then(data => {
                 dispatch(settravelTimeInformation(data.rows[0].elements[0]));
             })
