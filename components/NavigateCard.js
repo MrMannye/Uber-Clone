@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import tw from 'twrnc'
 import { GOOGLE_MAPS_APIKEY } from '@env'
@@ -6,6 +6,9 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { useDispatch } from 'react-redux';
 import { setDestination } from '../slices/navSlice';
 import { useNavigation } from '@react-navigation/native';
+import { Icon } from 'react-native-elements'
+
+import NavFavourites from './NavFavourites';
 
 export default function NavigateCard() {
 
@@ -22,7 +25,7 @@ export default function NavigateCard() {
                         styles={toInputBoxStyles}
                         placeholder='Where To?'
                         nearbyPlacesAPI='GooglePlacesSearch'
-                        debounce={100}
+                        debounce={10}
                         fetchDetails={true}
                         enablePoweredByContainer={false}
                         minLength={2}
@@ -40,6 +43,22 @@ export default function NavigateCard() {
                     >
                     </GooglePlacesAutocomplete>
                 </View>
+                <NavFavourites/>
+            </View>
+            <View style={tw`flex-row bg-white justify-evenly py-8 mt-auto border-gray-200`}>
+                <TouchableOpacity
+                onPress={() => navigation.navigate("RideOptionsCard")}
+                style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full`}>
+                    <Icon name='car' type='font-awesome' color="white" size={16}></Icon>
+                    <Text style={tw`text-white text-center`}>Rides</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                onPress={() => navigation.navigate("RideOptionsCard")}
+                style={tw`flex flex-row justify-between w-24 px-4 py-3 rounded-full`}>
+                    <Icon name='fast-food-outline' type='ionicon' color="black" size={16}></Icon>
+                    <Text style={tw`text-center`}>Eats</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -48,13 +67,13 @@ export default function NavigateCard() {
 const toInputBoxStyles = StyleSheet.create({
     container: {
         backgroundColor: "white",
-        paddingTop: 8, 
+        paddingTop: 6, 
         flex: 0,
     },
     textInput: {
         backgroundColor: "#DDDDDF",
         borderRadius: 0,
-        fontSize: 18,
+        fontSize: 17,
     },
     textInputContainer: {
         paddingHorizontal: 20, 

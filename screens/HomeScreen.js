@@ -2,6 +2,7 @@ import { StyleSheet, ScrollView, View, SafeAreaView, Image } from 'react-native'
 import React from 'react';
 import tw from 'twrnc';
 import NavOptions from '../components/NavOptions';
+import NavFavourites from '../components/NavFavourites';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 // VARIABLES DE ENTORNO
@@ -51,9 +52,10 @@ const HomeScreen = () => {
                         fetchDetails={true}
                         onFail={error => console.log(error)}
                         nearbyPlacesAPI='GooglePlacesSearch'
-                        debounce={400}
+                        debounce={10}
                     />
                 <NavOptions/>
+                <NavFavourites/>
             </View>
         </SafeAreaView>
     );
