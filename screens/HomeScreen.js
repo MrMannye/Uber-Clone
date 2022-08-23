@@ -1,12 +1,11 @@
-import { StyleSheet, ScrollView, View, SafeAreaView, Image } from 'react-native';
-import React from 'react';
+import { View, SafeAreaView, Image } from 'react-native';
 import tw from 'twrnc';
 import NavOptions from '../components/NavOptions';
 import NavFavourites from '../components/NavFavourites';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { MotiView, MotiText } from 'moti'
 
 // VARIABLES DE ENTORNO
-import { GOOGLE_MAPS_APIKEY } from '@env';
 import { useDispatch } from 'react-redux';
 import { setDestination, setOrigin } from '../slices/navSlice';
 
@@ -17,16 +16,26 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <View style={tw`p-5`}>
-                <Image
-                    style={{
-                        width: 90, 
-                        height: 80, 
-                        resizeMode: 'contain'
+                <MotiView
+                    from={{translateX: 0}}
+                    animate={{translateX: 5}}
+                    transition={{
+                        repeatReverse: true,
+                        type: 'timing',
+                        duration: 2000
                     }}
-                    source={{
-                        uri: 'https://links.papareact.com/gzs',
-                    }}
-                />
+                >
+                    <Image
+                        style={{
+                            width: 90, 
+                            height: 80, 
+                            resizeMode: 'contain'
+                        }}
+                        source={{
+                            uri: 'https://links.papareact.com/gzs',
+                        }}
+                    />
+                </MotiView>
                     <GooglePlacesAutocomplete
                         placeholder='Where From ?'
                         styles={{
@@ -45,7 +54,7 @@ const HomeScreen = () => {
                             dispatch(setDestination(null))
                         }}
                         query={{
-                            key: GOOGLE_MAPS_APIKEY,
+                            key: 'AIzaSyDQU68xEBvQyLcJZ-dGSRpa15M4e1kOMn0',
                             language: 'en',
                         }}
                         minLength={2}
@@ -62,6 +71,3 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-});

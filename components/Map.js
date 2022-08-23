@@ -4,7 +4,6 @@ import tw from 'twrnc'
 import { useSelector } from 'react-redux';
 import { selectOrigin, selectDestination, settravelTimeInformation } from '../slices/navSlice';
 import MapViewDirections from 'react-native-maps-directions';
-import { GOOGLE_MAPS_APIKEY } from '@env';
 import { useDispatch } from 'react-redux';
 
 // CONFIGURACION DE APP.JSON PARA LA API DE GOOGLE MAPS COMO SI FUERA 
@@ -30,14 +29,14 @@ export default function Map() {
         if(!origin || !destination) return;
 
         const getTravelTime = async() => {
-            fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
+            fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destinations=${destination.description}&key=AIzaSyDQU68xEBvQyLcJZ-dGSRpa15M4e1kOMn0`)
             .then(response => response.json())
             .then(data => {
                 dispatch(settravelTimeInformation(data.rows[0].elements[0]));
             })
         }
         getTravelTime();
-    },[origin, destination, GOOGLE_MAPS_APIKEY])
+    },[origin, destination])
 
     return (
         <MapView
@@ -56,7 +55,7 @@ export default function Map() {
                 <MapViewDirections
                     origin={origin.description}
                     destination={destination.description}
-                    apikey={GOOGLE_MAPS_APIKEY}
+                    apikey='AIzaSyDQU68xEBvQyLcJZ-dGSRpa15M4e1kOMn0'
                     strokeColor="black"
                     strokeWidth={3}
                 >

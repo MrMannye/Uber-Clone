@@ -1,7 +1,6 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import tw from 'twrnc'
-import { GOOGLE_MAPS_APIKEY } from '@env'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useDispatch } from 'react-redux';
 import { setDestination } from '../slices/navSlice';
@@ -30,7 +29,7 @@ export default function NavigateCard() {
                         enablePoweredByContainer={false}
                         minLength={2}
                         query={{
-                            key: GOOGLE_MAPS_APIKEY,
+                            key: 'AIzaSyDQU68xEBvQyLcJZ-dGSRpa15M4e1kOMn0',
                             language: "en"
                         }}
                         onPress={(data, details = null) => {

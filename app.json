@@ -31,7 +31,11 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "splash": {
+        "resizeMode": "cover",
+        "image": "./assets/uber.png"
+      }
     }
   }
 }
